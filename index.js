@@ -50,12 +50,14 @@ switch(num){
     break;   
 }
 
-gameStart();
+startBtn.addEventListener("click", gameStart);
 
 function gameStart(){    
     running= true;    
-    scoreText.textContent = score; 
-    drawShip();   
+    scoreText.textContent = score;
+    if(running){
+        drawShip();
+    }        
 }
 
 function drawShip(){

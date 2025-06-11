@@ -10,17 +10,49 @@ let running = false;
 let xVelocity = unitSize;
 let yVelocity = 0;
 let score = 0;
-let ship = [
-    {x:unitSize * 4, y:0},
-    {x:unitSize * 3, y:0},
-    {x:unitSize * 2, y:0},
-    {x:unitSize, y:0},
-    {x:0, y:0}
-];
+let num = Math.floor(Math.random() * 5) + 1;
+
+switch(num){
+    case 5:
+    ship = [
+        {x:unitSize * 4, y:0},
+        {x:unitSize * 3, y:0},
+        {x:unitSize * 2, y:0},
+        {x:unitSize, y:0},
+        {x:0, y:0}
+    ];
+    break; 
+    case 4:
+    ship = [        
+        {x:unitSize * 3, y:0},
+        {x:unitSize * 2, y:0},
+        {x:unitSize, y:0},
+        {x:0, y:0}
+    ];
+    break;
+    case 3:
+    ship = [        
+        {x:unitSize * 2, y:0},
+        {x:unitSize, y:0},
+        {x:0, y:0}
+    ];
+    break;
+    case 2:
+    ship = [        
+        {x:unitSize, y:0},
+        {x:0, y:0}
+    ];
+    break;
+    case 1:
+    ship = [        
+        {x:0, y:0}
+    ];
+    break;   
+}
 
 gameStart();
 
-function gameStart(){
+function gameStart(){    
     running= true;    
     scoreText.textContent = score; 
     drawShip();   

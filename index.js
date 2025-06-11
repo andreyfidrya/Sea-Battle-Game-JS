@@ -6,7 +6,6 @@ const shipBorder = "black";
 const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 
-let running = false;
 let xVelocity = unitSize;
 let yVelocity = 0;
 let score = 0;
@@ -51,13 +50,15 @@ switch(num){
 }
 
 startBtn.addEventListener("click", gameStart);
+stopBtn.addEventListener("click", gameStop);
 
-function gameStart(){    
-    running= true;    
-    scoreText.textContent = score;
-    if(running){
-        drawShip();
-    }        
+function gameStart(){   
+    scoreText.textContent = score;    
+    drawShip();            
+}
+
+function gameStop(){
+    window.location.reload();      
 }
 
 function drawShip(){

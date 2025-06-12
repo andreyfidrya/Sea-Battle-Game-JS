@@ -1,14 +1,19 @@
-const scoreText = document.querySelector("#scoreText");
-
-const unitSize = 25;
-const shipColor = "lightgreen";
-const shipBorder = "black";
 const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
-
+const scoreText = document.querySelector("#scoreText");
+const stopBtn = document.querySelector("#stopBtn");
+const gameWidth = gameBoard.width;
+const gameHeight = gameBoard.height;
+const boardBackground = "white";
+const snakeColor = "lightgreen";
+const snakeBorder = "black";
+const foodColor = "red";
+const unitSize = 25;
+let running = false;
 let xVelocity = unitSize;
 let yVelocity = 0;
 let score = 0;
+
 let num = Math.floor(Math.random() * 5) + 1;
 
 switch(num){
@@ -52,20 +57,51 @@ switch(num){
 startBtn.addEventListener("click", gameStart);
 stopBtn.addEventListener("click", gameStop);
 
-function gameStart(){   
-    scoreText.textContent = score;    
-    drawShip();            
-}
+function gameStart(){
+    running = true;
+    scoreText.textContent = score;
+    nextTick();
+};
 
-function gameStop(){
-    window.location.reload();      
-}
+function nextTick(){
+    if(running){
+        setTimeout(()=>{
+            clearBoard(); 
 
-function drawShip(){
-    ctx.fillStyle = shipColor;
-    ctx.strokeStyle = shipBorder;
+            moveSnake();
+            drawSnake(); 
+
+            nextTick();
+        }, 500);
+    }
+    
+};
+
+function clearBoard(){
+    ctx.fillStyle = boardBackground;
+    ctx.fillRect(0, 0, gameWidth, gameHeight);
+};
+
+function moveSnake(){
+    const head = {x: ship[0].x + xVelocity,
+                  y: ship[0].y + yVelocity};
+    ship.unshift(head);
+    if(false){
+
+    }
+    else{
+        ship.pop();
+    }
+};
+function drawSnake(){
+    ctx.fillStyle = snakeColor;
+    ctx.strokeStyle = snakeBorder;
     ship.forEach(shipPart => {
         ctx.fillRect(shipPart.x, shipPart.y, unitSize, unitSize);
         ctx.strokeRect(shipPart.x, shipPart.y, unitSize, unitSize);
     })
+};
+
+function gameStop(){
+    window.location.reload();
 };

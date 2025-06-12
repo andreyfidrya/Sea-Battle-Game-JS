@@ -65,16 +65,22 @@ function gameStart(){
 
 function nextTick(){
     if(running){
-        setTimeout(()=>{
-            
+        setTimeout(()=>{ 
+
+            clearBoard();
             moveSnake();
             drawSnake(); 
-
             nextTick();
+
         }, 500);
     }
     
 };
+
+function clearBoard(){ 
+ctx.fillStyle = boardBackground; 
+ctx.fillRect(0, 0, gameWidth, gameHeight); 
+}; 
 
 function moveSnake(){
     const head = {x: ship[0].x + xVelocity,
@@ -87,6 +93,7 @@ function moveSnake(){
         ship.pop();
     }
 };
+
 function drawSnake(){
     ctx.fillStyle = snakeColor;
     ctx.strokeStyle = snakeBorder;

@@ -66,8 +66,7 @@ function gameStart(){
 function nextTick(){
     if(running){
         setTimeout(()=>{
-            clearBoard(); 
-
+            
             moveSnake();
             drawSnake(); 
 
@@ -75,11 +74,6 @@ function nextTick(){
         }, 500);
     }
     
-};
-
-function clearBoard(){
-    ctx.fillStyle = boardBackground;
-    ctx.fillRect(0, 0, gameWidth, gameHeight);
 };
 
 function moveSnake(){

@@ -5,14 +5,19 @@ const stopBtn = document.querySelector("#stopBtn");
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "lightblue";
-const snakeColor = "lightgreen";
-const snakeBorder = "black";
+const shipColor = "lightgreen";
+const shipBorder = "black";
+const gunBorder = "black";
 const gunColor = "red";
 const unitSize = 25;
 let running = false;
 let xVelocity = unitSize;
 let yVelocity = 0;
 let score = 0;
+
+let gun = [
+    {x:gameWidth/2, y:gameHeight-unitSize} 
+];
 
 let num = Math.floor(Math.random() * 5) + 1;
 
@@ -68,8 +73,8 @@ function nextTick(){
         setTimeout(()=>{ 
 
             clearBoard();
-            moveSnake();
-            drawSnake();
+            moveShip();
+            drawShip();
             drawGun(); 
             nextTick();
 
@@ -83,7 +88,7 @@ ctx.fillStyle = boardBackground;
 ctx.fillRect(0, 0, gameWidth, gameHeight); 
 }; 
 
-function moveSnake(){
+function moveShip(){
     const head = {x: ship[0].x + xVelocity,
                   y: ship[0].y + yVelocity};
     ship.unshift(head);
@@ -95,9 +100,9 @@ function moveSnake(){
     }
 };
 
-function drawSnake(){
-    ctx.fillStyle = snakeColor;
-    ctx.strokeStyle = snakeBorder;
+function drawShip(){
+    ctx.fillStyle = shipColor;
+    ctx.strokeStyle = shipBorder;
     ship.forEach(shipPart => {
         ctx.fillRect(shipPart.x, shipPart.y, unitSize, unitSize);
         ctx.strokeRect(shipPart.x, shipPart.y, unitSize, unitSize);
@@ -110,5 +115,9 @@ function gameStop(){
 
 function drawGun(){
     ctx.fillStyle = gunColor;
-    ctx.fillRect(gameWidth/2, gameHeight-unitSize, unitSize, unitSize);
+    ctx.strokeStyle = gunBorder;
+    gun.forEach(gunPart => {
+        ctx.fillRect(gunPart.x, gunPart.y, unitSize, unitSize);
+        ctx.strokeRect(gunPart.x, gunPart.y, unitSize, unitSize);
+    })
 }

@@ -7,7 +7,7 @@ const gameHeight = gameBoard.height;
 const boardBackground = "lightblue";
 const snakeColor = "lightgreen";
 const snakeBorder = "black";
-const foodColor = "red";
+const gunColor = "red";
 const unitSize = 25;
 let running = false;
 let xVelocity = unitSize;
@@ -69,7 +69,8 @@ function nextTick(){
 
             clearBoard();
             moveSnake();
-            drawSnake(); 
+            drawSnake();
+            drawGun(); 
             nextTick();
 
         }, 500);
@@ -106,3 +107,8 @@ function drawSnake(){
 function gameStop(){
     window.location.reload();
 };
+
+function drawGun(){
+    ctx.fillStyle = gunColor;
+    ctx.fillRect(gameWidth/2, gameHeight-unitSize, unitSize, unitSize);
+}

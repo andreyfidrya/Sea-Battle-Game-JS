@@ -2,6 +2,7 @@ const gameBoard = document.querySelector("#gameBoard");
 const ctx = gameBoard.getContext("2d");
 const scoreText = document.querySelector("#scoreText");
 const stopBtn = document.querySelector("#stopBtn");
+
 const gameWidth = gameBoard.width;
 const gameHeight = gameBoard.height;
 const boardBackground = "lightblue";
@@ -75,7 +76,8 @@ function nextTick(){
             clearBoard();
             moveShip();
             drawShip();
-            drawGun(); 
+            drawGun();
+             
             nextTick();
 
         }, 500);
@@ -120,4 +122,37 @@ function drawGun(){
         ctx.fillRect(gunPart.x, gunPart.y, unitSize, unitSize);
         ctx.strokeRect(gunPart.x, gunPart.y, unitSize, unitSize);
     })
+}
+
+document.addEventListener("keydown", moveGun);
+
+function moveGun(event) {
+    const key = event.key;
+
+    // Get current gun position
+    let gunHead = gun[0];
+
+    // Update position based on key
+    switch (key) {
+        case "ArrowLeft":
+            if (gunHead.x - unitSize >= 0) {
+                gunHead.x -= unitSize;
+            }
+            break;
+        case "ArrowRight":
+            if (gunHead.x + unitSize < gameWidth) {
+                gunHead.x += unitSize;
+            }
+            break;
+        case "ArrowUp":
+            if (gunHead.y - unitSize >= 0) {
+                gunHead.y -= unitSize;
+            }
+            break;
+        case "ArrowDown":
+            if (gunHead.y + unitSize < gameHeight) {
+                gunHead.y += unitSize;
+            }
+            break;
+    }
 }
